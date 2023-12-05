@@ -1,0 +1,89 @@
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+#login {
+  background-image: url("../src/static/images/backD.png");
+  background-size: cover;
+  background-repeat: none;
+  height:100vh;
+}
+
+@media(max-width:768px) {
+  body {
+      background-image: none;
+  }
+}
+
+.card-man {
+  margin-top: 130px;
+  margin-right: 40px;
+  background: none;
+  height: 550px;
+  box-shadow: 2px 20px 25px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  border: none;
+  width: 1000px;
+}
+
+
+
+.card-man-body {
+  height: 500px;
+}
+@media (min-width:300px) and (max-width:768px) {
+  .card-man {
+      margin-top: 0px;
+      margin-left: 0px;
+      margin-right: 0px;
+      height: 100vh;
+  }
+}
+.logo-img {
+  width: 42%;
+  height: 27%;
+  margin-top: 40%;
+}
+@media(min-width:300px) and (max-width:768px) {
+  img {
+      margin-top: 50px;
+      margin-left: 0px;
+  }
+  
+  .theme-background {
+      background: linear-gradient(180deg, #446DEC, #3F99DB);
+      ;
+  }
+  
+  .card-man {
+      height: 100vh;
+  }
+}
+input {
+  border: 1px rgba(125, 120, 120, 0.58) solid;
+  box-shadow: 2px 10px 15px rgba(0, 0, 0, 0.25);
+}
+h1 {
+  background: linear-gradient(180deg, #446DEC, #3F99DB);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+.btn1 {
+  width: 40%;
+  background-image: linear-gradient(180deg, #446DEC, #3F99DB);
+  border-radius: 5px;
+}
+
+.modal-backdrop.show{
+  opacity: 0 !important;
+}
+
+.over-trash{
+  color: white;
+}
+.over-trash:hover{
+  color: black;
+}
