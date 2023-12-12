@@ -127,7 +127,7 @@ const Login = () => {
                                 
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 ml-auto">
-                            <GoogleOAuthProvider clientId="860482418752-vchd3om87tep6iel0r1k318i6i091b8r.apps.googleusercontent.com">
+                            <GoogleOAuthProvider clientId="883118116357-itvhca04f1h3fa9la5d3fr7gen5suqgh.apps.googleusercontent.com">
                                 <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
                             </GoogleOAuthProvider>
                             </div>
