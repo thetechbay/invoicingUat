@@ -10,7 +10,7 @@ const Check = () => {
     },[refresh])
 
     const checkAuthentication = () => {
-        if(localStorage.getItem('token') !== null){
+        if(localStorage.getItem('token')){
             window.location = '/dashboard';
         }
         else{

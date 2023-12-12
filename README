@@ -1,0 +1,28 @@
+{
+    "Expires": "2021-09-23T19:31:13.326633Z",
+    "UserInfo": {
+        "Id": "github_50545456",
+        "DisplayName": "Aniket2202",
+        "EmailAddress": "Aniket2202@users.noreply.github.com",
+        "UserName": "Aniket2202",
+        "AccountStatus": 3,
+        "AvatarUri": "",
+        "RecentCollaborators": [
+            {
+                "Id": "github_50545456",
+                "Email": "Aniket2202@users.noreply.github.com",
+                "Name": "Aniket2202",
+                "AvatarUri": ""
+            },
+            {
+                "Id": "github_77316389",
+                "Email": "amanojhagit@users.noreply.github.com",
+                "Name": "amanojhagit",
+                "AvatarUri": ""
+            }
+        ],
+        "TelemetryId": "90dc7bbc-89fb-47ec-86be-87be5197d072",
+        "ProviderName": "github",
+        "AccountId": "Aniket2202@users.noreply.github.com"
+    }
+}

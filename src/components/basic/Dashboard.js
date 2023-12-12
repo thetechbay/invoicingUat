@@ -1,237 +1,244 @@
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import './dashboard.css';
+import Chart from 'chart.js/auto';
+import { getRelativePosition } from 'chart.js/helpers';
+import { CategoryScale } from "chart.js";
+// import PieChart from "../components/PieChart";
 import { Link } from 'react-router-dom';
+import { Bar } from "react-chartjs-2";
+
+
+
+
+Chart.register(CategoryScale);
+
+
 
 const Dashboard = () => {
-  const [refresh,setRefresh]=useState(true); 
-  useEffect( ()=>{
+  const [refresh, setRefresh] = useState(true);
+  const [chartData, setChartData] = useState({
+    labels: ['Sales Count', "Company Count", "User Count", 'Client count'],
+    datasets: [
+      {
+        label: "value ",
+        data: [localStorage.getItem('sale_count'), localStorage.getItem('company_count'), localStorage.getItem('user_count'), localStorage.getItem('clients_count')],
+        backgroundColor: [
+          "cyan",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0"
+        ],
+
+      }
+    ]
+  });
+
+  useEffect(() => {
     checkAuthentication();
-},[refresh])
+  }, [refresh])
 
-const checkAuthentication = () => {
-  console.log(localStorage.getItem('token'),"local")
-    if(!localStorage.getItem('token') === ""){
-      console.log("token nhi mila")
-        window.location = '/login';
-        toast("Please login, Session Expired",{"type":"success"});
+  const checkAuthentication = () => {
+    console.log(localStorage.getItem('token'), "local")
+    if (!localStorage.getItem('token') != undefined) {
     }
-}
+    else {
+      window.location = '/logout'
+    }
+  }
 
-const PrintScreen = () => {
-  window.print();
-}
-    return (
-        <div>
-         <nav className="navbar navbar-expand-lg navbar-light">
-     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-      
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <div className="container-fluid">
-          <div className="row">
 
-            <div className="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
-              <Link to="#" className="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Socrates</Link>
-              <div className="bottom-border pb-3">
-                {/* <img src="images/admin.jpeg" width="50" className="rounded-circle mr-3"> */}
-                <Link to="#" className="text-white">Aniket vyas</Link>
-              </div>
-              <ul className="navbar-nav flex-column mt-4">
-              <li className="nav-item"><Link to="/dashboard/profile" className="nav-link text-white p-1 mb-2 current"><small><i className="fas fa-home text-light fa-lg mr-3"></i>Profile</small></Link></li>
-                <li className="nav-item"><Link to="/dashboard/sales" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-user text-light fa-lg mr-3"></i>Sales</Link></li>
-                <li className="nav-item"><Link to="/dashboard/inventory" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-envelope text-light fa-lg mr-3"></i>Inventory</Link></li>
-                <li className="nav-item"><Link to="/dashboard/purchase" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-shopping-cart text-light fa-lg mr-3"></i>Purchase</Link></li>
-                <li className="nav-item"><Link to="/dashboard/clients" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-chart-line text-light fa-lg mr-3"></i>Clients</Link></li>
-            
-              </ul>
-            </div>
 
-            <div className="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top py-2 top-navbar">
-              <div className="row align-items-center">
-                <div className="col-md-4">
-                  <h4 className="text-light text-uppercase mb-0">Socrates</h4>
-                </div>
-                <div className="col-md-5">
-                  
-                </div>
-                <div className="col-md-9">
-                  <ul className="navbar-nav">
-                    <li className="nav-item ml-md-auto"><Link to='/logout' className="nav-link" data-toggle="modal" data-target="#sign-out"><i className="fas fa-sign-out-alt text-danger fa-lg"></i>Logout</Link></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+  // const data = {
+  //   labels: labels,
+  //   datasets: [{
+  //     label: 'My First Dataset',
+  //     data: [65, 59, 80, 81, 56, 55, 40],
+  //     backgroundColor: [
+  //       'rgba(255, 99, 132, 0.2)',
+  //       'rgba(255, 159, 64, 0.2)',
+  //       'rgba(255, 205, 86, 0.2)',
+  //       'rgba(75, 192, 192, 0.2)',
+  //       'rgba(54, 162, 235, 0.2)',
+  //       'rgba(153, 102, 255, 0.2)',
+  //       'rgba(201, 203, 207, 0.2)'
+  //     ],
+  //     borderColor: [
+  //       'rgb(255, 99, 132)',
+  //       'rgb(255, 159, 64)',
+  //       'rgb(255, 205, 86)',
+  //       'rgb(75, 192, 192)',
+  //       'rgb(54, 162, 235)',
+  //       'rgb(153, 102, 255)',
+  //       'rgb(201, 203, 207)'
+  //     ],
+  //     borderWidth: 1
+  //   }]
+  // };
 
-          </div>
-        </div>
-      </div>
-    </nav>
-    <section>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
-            <div className="row pt-md-5 mt-md-3 mb-5">
-              <div className="col-xl-3 col-sm-6 p-2">
-                <div className="card card-common">
-                  <div className="card-body">
-                    <div className="d-flex justify-content-between">
-                    <i className="fas fa-users fa-3x text-info"></i>
-                      
-                      <div className="text-right text-secondary">
-                        <h5>Clients</h5>
-                        <h3>45</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-footer text-secondary">
-                    <i className="fas fa-sync mr-3"></i>
-                    <span>Updated Now</span>
+  const PrintScreen = () => {
+    window.print();
+  }
+  return (
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <div className="container-fluid">
+            <div className="row">
+
+              <div className="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+                <Link to="#" className="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Socrates</Link>
+                <div className="bottom-border pb-3">
+                  {/* <img src="images/admin.jpeg" width="50" className="rounded-circle mr-3"> */}
+                  <Link to="#" className="text-white">{localStorage.getItem('user_name')}</Link>
+                </div>
+                <ul className="navbar-nav flex-column mt-4">
+                  <li className="nav-item"><Link to="/dashboard/profile" className="nav-link text-white p-1 mb-2 current"><small><i className="fas fa-home text-light fa-lg mr-3"></i>Profile</small></Link></li>
+                  <li className="nav-item"><Link to="/dashboard/sales" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-user text-light fa-lg mr-3"></i>Sales</Link></li>
+                  <li className="nav-item"><Link to="/dashboard/clients" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-chart-line text-light fa-lg mr-3"></i>Clients</Link></li>
+
+                </ul>
+              </div>
+
+              <div className="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top py-2 top-navbar">
+                <div className="row align-items-center">
+
+
+                  <div className="col-md-12">
+                    <ul className="navbar-nav">
+                      <li className="nav-item ml-md-auto"><Link to='/logout' className="nav-link text-white text-right" data-toggle="modal" data-target="#sign-out"><i className="fas fa-sign-out-alt text-danger fa-lg"></i>Logout</Link></li>
+                    </ul>
                   </div>
                 </div>
               </div>
-              <div className="col-xl-3 col-sm-6 p-2">
-                <div className="card card-common">
-                  <div className="card-body">
-                    <div className="d-flex justify-content-between">
-                      <i className="fas fa-money-bill-alt fa-3x text-success"></i>
-                      <div className="text-right text-secondary">
-                        <h5>Sales </h5>
-                        <h3>$39,000</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-footer text-secondary">
-                    <i className="fas fa-sync mr-3"></i>
-                    <span>Updated Now</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-3 col-sm-6 p-2">
-                <div className="card card-common">
-                  <div className="card-body">
-                    <div className="d-flex justify-content-between">
-                    <i className="fas fa-shopping-cart fa-3x text-warning"></i>
-                      <div className="text-right text-secondary">
-                        <h5>Purchases</h5>
-                        <h3>15,000</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-footer text-secondary">
-                    <i className="fas fa-sync mr-3"></i>
-                    <span>Updated Now</span>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-3 col-sm-6 p-2">
-                <div className="card card-common">
-                  <div className="card-body">
-                    <div className="d-flex justify-content-between">
-                      <i className="fas fa-message fa-3x text-danger"></i>
-                      <div className="text-right text-secondary">
-                        <h5>Payment</h5>
-                        <h3>45,000</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="card-footer text-secondary">
-                    <i className="fas fa-sync mr-3"></i>
-                    <span>Updated Now</span>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-
-    <section>
-      <div class="container-fluid">
-        <div class="row mb-5">
-          <div class="col-xl-10 col-lg-9 col-md-12 ml-auto">
-            <div class="row align-items-center">
-              <div class="col-xl-12 col-12 mb-4 mb-xl-0">
-                <h3 class="text-muted text-center mb-3">Recent Transactions</h3>
-                <table class="table table-striped bg-light text-center">
-                  <thead>
-                    <tr class="text-muted">
-                      <th>#</th>
-                      <th>Date</th>
-                      <th>Invoice #</th>
-                      <th>Party Name</th>
-                      <th>Transaction Type</th>
-                      <th>Payment Type</th>
-                      <th>Amount</th>
-                      <th>Balance due</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>1</th>
-                      <td>5-8-2019</td>
-                      <td><Link to="/sales/invoice/INV0000556">INV0000556</Link></td>
-                      <td>Marble Corporation India</td>
-                      <td>CASH</td>
-                      <td>CASH</td>
-                      <td class="text-success">10,000</td>
-                      <td class="text-danger">10,000</td>
-                      <td><button class="btn btn-outline-primary btn-sm" onClick={() => PrintScreen()}><i class="fa fa-print"></i></button></td>
-                    </tr>
-                  </tbody>
-                </table>
-
-             
-                <nav>
-                  <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                      <Link to="#" class="page-link py-2 px-3">
-                        <span>&laquo;</span>
-                      </Link>
-                    </li>
-                    <li class="page-item active">
-                      <Link to="#" class="page-link py-2 px-3">
-                        1
-                      </Link>
-                    </li>
-                    <li class="page-item">
-                      <Link to="#" class="page-link py-2 px-3">
-                        2
-                      </Link>
-                    </li>
-                    <li class="page-item">
-                      <Link to="#" class="page-link py-2 px-3">
-                        3
-                      </Link>
-                    </li>
-                    <li class="page-item">
-                      <Link to="#" class="page-link py-2 px-3">
-                        <span>&raquo;</span>
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-             
-        
+      </nav>
+      <section>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                <div className="row pt-md-5 mt-md-3 mb-5">
+                  <div className="col-xl-3 col-sm-6 p-2">
+                    <div className="card card-common">
+                      <div className="card-body">
+                        <div className="d-flex justify-content-between">
+                          <i className="fas fa-users fa-3x text-info"></i>
+  
+                          <div className="text-right text-primary">
+                            <h5>Clients</h5>
+                            <h3>{localStorage.getItem('clients_count')}</h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="card-footer text-secondary">
+                        <i className="fas fa-sync mr-3"></i>
+                        <span>Updated Now</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-3 col-sm-6 p-2">
+                    <div className="card card-common">
+                      <div className="card-body">
+                        <div className="d-flex justify-content-between">
+                          <i className="fas fa-money-bill-alt fa-3x text-success"></i>
+                          <div className="text-right text-warning">
+                            <h5>Total Sales Amount</h5>
+                            <h3>{localStorage.getItem('sales_total')}</h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="card-footer text-secondary">
+                        <i className="fas fa-sync mr-3"></i>
+                        <span>Updated Now</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-3 col-sm-6 p-2">
+                    <div className="card card-common">
+                      <div className="card-body">
+                        <div className="d-flex justify-content-between">
+                          <i className="fas fa-shopping-cart fa-3x text-warning"></i>
+                          <div className="text-right text-success">
+                            <h5>Amount received</h5>
+                            <h3 className="text-success">+{localStorage.getItem('sales_paid')}</h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="card-footer text-secondary">
+                        <i className="fas fa-sync mr-3"></i>
+                        <span>Updated Now</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xl-3 col-sm-6 p-2">
+                    <div className="card card-common">
+                      <div className="card-body">
+                        <div className="d-flex justify-content-between">
+                          <i className="fas fa-message fa-3x text-danger"></i>
+                          <div className="text-right text-danger">
+                            <h5>Amount Remaining</h5>
+                            <h3>-{localStorage.getItem('sales_remaining')}</h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="card-footer text-secondary">
+                        <i className="fas fa-sync mr-3"></i>
+                        <span>Updated Now</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
+          </div>
+        </section>
+       
 
 
-
-
-
-
-             
+      <section>
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-xl-10 col-lg-9 col-md-12 ml-auto">
+              <div class="row align-items-center">
+                <div class="col-xl-12 col-12 mb-4 mb-xl-0">
+                  <div className="card card-common">
+                    <div className="card-body">
+                      <div className="chart-container">
+                        <h2 style={{ textAlign: "center" }}>Usage Analytics</h2>
+                        <Bar
+                          data={chartData}
+                          options={{
+                            plugins: {
+                              title: {
+                                display: true,
+                                text: "Clients, companies and sales analytics"
+                              },
+                              legend: {
+                                display: false
+                              }
+                            }
+                          }}
+                        />
+                      </div>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
-    </section>
+      </section>
     </div>
-    );
+  );
 }
 
 export default Dashboard;

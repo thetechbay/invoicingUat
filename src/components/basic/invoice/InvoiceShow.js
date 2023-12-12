@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import InvoiceForm from './InvoiceForm';
 
-const InvoiceTest = () => {
+const InvoiceShow = () => {
 
     return (
     <div>
@@ -19,12 +19,14 @@ const InvoiceTest = () => {
             <div className="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
               <Link to="#" className="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Socrates</Link>
               <div className="bottom-border pb-3">
-                <Link to="#" className="text-white">{localStorage.getItem('user_name')}</Link>
+                <Link to="#" className="text-white">Aniket vyas</Link>
               </div>
               <ul className="navbar-nav flex-column mt-4">
               <li className="nav-item"><Link to="/" className="nav-link text-white p-1 mb-2 current"><small><i className="fas fa-home text-light fa-lg mr-3"></i>Home</small></Link></li>
                 <li className="nav-item"><Link to="/dashboard/sales" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-user text-light fa-lg mr-3"></i>Sales</Link></li>
-                 <li className="nav-item"><Link to="/dashboard/clients" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-chart-line text-light fa-lg mr-3"></i>Clients</Link></li>
+                <li className="nav-item"><Link to="/dashboard/inventory" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-envelope text-light fa-lg mr-3"></i>Inventory</Link></li>
+                <li className="nav-item"><Link to="/dashboard/purchase" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-shopping-cart text-light fa-lg mr-3"></i>Purchase</Link></li>
+                <li className="nav-item"><Link to="/dashboard/clients" className="nav-link text-white p-1 mb-2 sidebar-link"><i className="fas fa-chart-line text-light fa-lg mr-3"></i>Clients</Link></li>
             
               </ul>
             </div>
@@ -67,4 +69,4 @@ const InvoiceTest = () => {
 }
 
 
-export default InvoiceTest;
+export default InvoiceShow;

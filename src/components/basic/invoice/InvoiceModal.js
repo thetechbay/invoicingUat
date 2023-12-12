@@ -36,6 +36,7 @@ function GenerateInvoice() {
 class InvoiceModal extends React.Component {
   constructor(props) {
     super(props);
+    console.log("props", props)
   }
 
   render() {
@@ -56,7 +57,11 @@ class InvoiceModal extends React.Component {
               </div>
             </div>
             <div className="p-4">
-              <Row className="mb-4">
+              {
+                this.props.review 
+                ?
+
+                <Row className="mb-4">
                 <Col md={4}>
                   <div className="fw-bold">Billed to:</div>
                   <div>{this.props.info.billTo||''}</div>
@@ -74,6 +79,30 @@ class InvoiceModal extends React.Component {
                   <div>{this.props.info.dateOfIssue||''}</div>
                 </Col>
               </Row>
+
+                :
+      
+                <Row className="mb-4">
+                <Col md={4}>
+                  <div className="fw-bold">Billed to:</div>
+                  <div>{this.props.info.client.name||''}</div>
+                  <div>{this.props.info.client.address||''}</div>
+                  <div>{this.props.info.client.email||''}</div>
+                </Col>
+                <Col md={4}>
+                  <div className="fw-bold">Billed From:</div>
+                  <div>{this.props.info.company.name||''}</div>
+                  <div>{this.props.info.company.address||''}</div>
+                  <div>{this.props.info.company.email||''}</div>
+                </Col>
+                <Col md={4}>
+                  <div className="fw-bold mt-2">Date Of Issue:</div>
+                  <div>{this.props.info.invoice_date||''}</div>
+                </Col>
+              </Row>
+          
+              }
+             
               <Table className="mb-0">
                 <thead>
                   <tr>

@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React ,{useEffect, useState} from "react";
 // import './login.css'
 import signIn, { authenticate, isAuthenticated } from '../../auth/loginAPI';
 import { Redirect } from "react-router";
@@ -18,6 +18,8 @@ const Login = () => {
         email : "",
         password: ""
     });
+
+
     const delay = ms => new Promise(res => setTimeout(res, ms));
     const {email,password} = values;
     const responseMessage = async(response) => {
@@ -41,6 +43,18 @@ const Login = () => {
         
     };
 
+    useEffect( () => {
+        checkAuthentication();
+    },[])
+
+    const checkAuthentication = () => {
+        console.log(localStorage.getItem("token"));
+        if (localStorage.getItem("token")) {
+          console.log("token exist krra");
+          window.location = '/dashboard';
+        } 
+      };
+
     const ShareDatatoBackend =(data) => {
         const networkData = {}
         networkData['email'] = data.email;
@@ -53,17 +67,30 @@ const Login = () => {
         Axios.post(`${API}/authentication_data`,
 			(networkData),
 			).then(response=>{
-            console.log(response.data);
-            if(response.data.token!==""){
+            console.log(response.data.company);
+            if(response.data.token!== undefined){
                 localStorage.setItem("token",response.data.token)
+                localStorage.setItem("customer_unique",response.data.customer.customer_unique)
+                localStorage.setItem('sale_count',response.data.sales_count)
+                localStorage.setItem('clients_count', response.data.clients_count)
+                localStorage.setItem('company_count',response.data.company_count)
+                localStorage.setItem('user_count',response.data.user_count)
+                localStorage.setItem('user_name', response.data.user_data)
+                localStorage.setItem('sales_total', response.data.sales_total)
+                localStorage.setItem('sales_paid',response.data.sales_paid)
+                localStorage.setItem('sales_remaining', response.data.sales_remaining)
+                
+                toast("Saved, authentication Successfull",{type:"success"})
+                delay(3000);
+                window.location = '/dashboard'
             }
-            toast("Saved, authentication Successfull",{type:"success"})
-            delay(3000);
-            window.location = '/dashboard'
+            else{
+                toast(response.data.error)
+            }
         }).catch(error=>{
                 console.log(error)
-                return false;
                 toast("Error",{type:"error"})
+                return false;
         })
     }
 

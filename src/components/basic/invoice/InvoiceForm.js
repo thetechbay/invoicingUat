@@ -352,7 +352,7 @@ createInvoiceId() {
           <div className="sticky-top pt-md-3 pt-xl-4">
             {/* <Button variant="success" type="button" id="saveBtn" className="d-block w-100 mb-1" onClick={this.saveDataToBackend.bind(this)}>Save</Button> */}
             <Button variant="primary" type="submit" className="d-block w-100">Review Invoice</Button>
-            <InvoiceModal showModal={this.state.isOpen} amountInWords={this.state.amountInWords} closeModal={this.closeModal} info={this.state} items={this.state.items} currency={this.state.currency} subTotal={this.state.subTotal} taxAmmount={this.state.taxAmmount} discountAmmount={this.state.discountAmmount} total={this.state.total}/>
+            <InvoiceModal review={true} showModal={this.state.isOpen} amountInWords={this.state.amountInWords} closeModal={this.closeModal} info={this.state} items={this.state.items} currency={this.state.currency} subTotal={this.state.subTotal} taxAmmount={this.state.taxAmmount} discountAmmount={this.state.discountAmmount} total={this.state.total}/>
             <Form.Group className="mb-3">
               <Form.Label className="fw-bold">Currency:</Form.Label>
               <Form.Select onChange={event => this.onCurrencyChange({currency: event.target.value})} className="btn btn-light my-1" aria-label="Change Currency">
