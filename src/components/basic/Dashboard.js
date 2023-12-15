@@ -42,6 +42,7 @@ const Dashboard = () => {
   const checkAuthentication = () => {
     console.log(localStorage.getItem('token'), "local")
     if (!localStorage.getItem('token') === null) {
+      console.log("redirecting to login")
       window.location = '/logout'
     }
   }
